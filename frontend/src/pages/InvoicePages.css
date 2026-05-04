@@ -1,0 +1,128 @@
+.invoice-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.invoice-page h1 {
+  margin-bottom: 12px;
+}
+
+.invoice-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+  align-items: center;
+}
+
+.invoice-controls select,
+.invoice-controls button,
+.invoice-actions button {
+  padding: 10px 14px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.invoice-list {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.invoice-list th,
+.invoice-list td {
+  padding: 12px 10px;
+  border: 1px solid #e7e7e7;
+  text-align: left;
+}
+
+.invoice-list th {
+  background: #f9f9f9;
+}
+
+.invoice-status {
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.invoice-status.draft {
+  color: #555;
+}
+
+.invoice-status.sent {
+  color: #1d6fff;
+}
+
+.invoice-status.paid {
+  color: #1a9e58;
+}
+
+.invoice-form {
+  display: grid;
+  gap: 16px;
+}
+
+.invoice-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.invoice-form input,
+.invoice-form textarea,
+.invoice-form select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+}
+
+.invoice-items {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.invoice-items th,
+.invoice-items td {
+  padding: 10px;
+  border: 1px solid #e7e7e7;
+}
+
+.invoice-items th {
+  background: #f9f9f9;
+}
+
+.invoice-total {
+  margin-top: 16px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.invoice-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.invoice-error {
+  color: #b61717;
+}
+
+button.primary {
+  background: #1d6fff;
+  color: #fff;
+  border-color: #1d6fff;
+}
+
+button.danger {
+  background: #d43838;
+  color: #fff;
+  border-color: #d43838;
+}
+
+button.secondary {
+  background: #f5f5f5;
+}

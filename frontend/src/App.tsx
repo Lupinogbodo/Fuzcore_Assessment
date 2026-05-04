@@ -5,6 +5,9 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import CustomersPage from './pages/CustomersPage'
 import TransactionsPage from './pages/TransactionsPage'
+import InvoicesPage from './pages/InvoicesPage'
+import InvoiceNewPage from './pages/InvoiceNewPage'
+import InvoiceDetailPage from './pages/InvoiceDetailPage'
 
 export default function App() {
   return (
@@ -37,6 +40,30 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <TransactionsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/invoices"
+            element={
+              <ProtectedRoute>
+                <InvoicesPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/invoices/new"
+            element={
+              <ProtectedRoute>
+                <InvoiceNewPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/invoices/:id"
+            element={
+              <ProtectedRoute>
+                <InvoiceDetailPage />
               </ProtectedRoute>
             }
           />

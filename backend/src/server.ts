@@ -5,6 +5,7 @@ import { authMiddleware, errorHandler } from './middleware/auth.js'
 import authRoutes from './routes/auth.js'
 import customersRoutes from './routes/customers.js'
 import transactionsRoutes from './routes/transactions.js'
+import invoicesRoutes from './routes/invoices.js'
 
 dotenv.config()
 
@@ -31,6 +32,9 @@ app.use('/api/customers', customersRoutes)
 
 // Transaction and category routes
 app.use('/api', transactionsRoutes)
+
+// Invoice routes
+app.use('/api', invoicesRoutes)
 
 app.get('/api/hello', (req, res) => {
   res.json({

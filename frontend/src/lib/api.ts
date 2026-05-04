@@ -144,10 +144,70 @@ export async function deleteCustomer(
   })
 }
 
-interface Customer {
+export interface Customer {
   id: string
   name: string
   email?: string | null
   phone?: string | null
   address?: string | null
+}
+
+export interface InvoiceItem {
+  id: string
+  description: string
+  quantity: number
+  unit_price: number
+}
+
+export interface InvoiceListItem {
+  id: string
+  invoice_number: string
+  status: 'draft' | 'sent' | 'paid'
+  issue_date: string
+  due_date?: string | null
+  customer_name: string
+  total: string
+}
+
+export interface InvoiceDetail extends InvoiceListItem {
+  notes?: string | null
+  customer_id: string
+  customer_email?: string | null
+  customer_phone?: string | null
+  customer_address?: string | null
+  items: InvoiceItem[]
+}
+
+export async function getInvoices(status?: 'draft' | 'sent' | 'paid') {
+  const query = status ? `?status=${status}` : ''
+  return apiCall<InvoiceListItem[]>(`/api/invoices${query}`)
+}
+
+export async function getInvoice(id: string) {
+  return apiCall<InvoiceDetail>(`/api/invoices/${id}`)
+}
+
+export async function createInvoice(payload: {
+  customer_id: string
+  due_date?: string
+  notes?: string | null
+  items: Array<Pick<InvoiceItem, 'description' | 'quantity' | 'unit_price'>>
+}) {
+  return apiCall<{ id: string }>('/api/invoices', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  })
+}
+
+export async function updateInvoiceStatus(id: string, status: 'sent' | 'paid') {
+  return apiCall<{ id: string; status: 'draft' | 'sent' | 'paid' }>(`/api/invoices/${id}/status`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status }),
+  })
+}
+
+export async function deleteInvoice(id: string) {
+  return apiCall<{ success: boolean }>(`/api/invoices/${id}`, {
+    method: 'DELETE',
+  })
 }
