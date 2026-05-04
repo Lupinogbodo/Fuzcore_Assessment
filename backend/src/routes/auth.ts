@@ -24,6 +24,36 @@ function generateToken(id: string, email: string): string {
   })
 }
 
+async function seedDefaultCategories(userId: string) {
+  const categories = [
+    { name: 'Sales', type: 'income' },
+    { name: 'Freelance', type: 'income' },
+    { name: 'Investment', type: 'income' },
+    { name: 'Other Income', type: 'income' },
+    { name: 'Rent', type: 'expense' },
+    { name: 'Utilities', type: 'expense' },
+    { name: 'Salaries', type: 'expense' },
+    { name: 'Marketing', type: 'expense' },
+    { name: 'Software', type: 'expense' },
+    { name: 'Travel', type: 'expense' },
+    { name: 'Other Expense', type: 'expense' },
+  ]
+
+  const values = categories
+    .map((_, index) => `($1, $${index * 2 + 2}, $${index * 2 + 3})`)
+    .join(', ')
+
+  const params = categories.reduce(
+    (acc: Array<string>, category) => [...acc, category.name, category.type],
+    [userId]
+  )
+
+  await pool.query(
+    `INSERT INTO categories (user_id, name, type) VALUES ${values}`,
+    params
+  )
+}
+
 // POST /api/auth/signup
 router.post('/signup', async (req: Request, res: Response) => {
   try {
@@ -47,6 +77,7 @@ router.post('/signup', async (req: Request, res: Response) => {
     )
 
     const user = result.rows[0]
+    await seedDefaultCategories(user.id)
     const token = generateToken(user.id, user.email)
 
     res.status(201).json({

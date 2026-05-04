@@ -64,6 +64,59 @@ export async function getCustomers(): Promise<ApiResponse<Customer[]>> {
   return apiCall('/api/customers')
 }
 
+export async function getCategories(type?: 'income' | 'expense') {
+  const query = type ? `?type=${type}` : ''
+  return apiCall<Category[]>(`/api/categories${query}`)
+}
+
+export async function getTransactions(filters?: {
+  type?: 'income' | 'expense'
+  category_id?: string
+  from?: string
+  to?: string
+}) {
+  const params = new URLSearchParams()
+
+  if (filters?.type) params.set('type', filters.type)
+  if (filters?.category_id) params.set('category_id', filters.category_id)
+  if (filters?.from) params.set('from', filters.from)
+  if (filters?.to) params.set('to', filters.to)
+
+  const query = params.toString() ? `?${params.toString()}` : ''
+  return apiCall<Transaction[]>(`/api/transactions${query}`)
+}
+
+export async function createTransaction(
+  payload: Omit<Transaction, 'id' | 'category_name'>
+) {
+  return apiCall<Transaction>('/api/transactions', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  })
+}
+
+export async function deleteTransaction(id: string) {
+  return apiCall<{ success: boolean }>(`/api/transactions/${id}`, {
+    method: 'DELETE',
+  })
+}
+
+interface Transaction {
+  id: string
+  amount: number
+  type: 'income' | 'expense'
+  description?: string | null
+  date: string
+  category_id?: string | null
+  category_name?: string | null
+}
+
+interface Category {
+  id: string
+  name: string
+  type: 'income' | 'expense'
+}
+
 export async function createCustomer(
   payload: Omit<Customer, 'id'>
 ): Promise<ApiResponse<Customer>> {

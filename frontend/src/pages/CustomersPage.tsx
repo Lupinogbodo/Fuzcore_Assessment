@@ -63,7 +63,7 @@ export default function CustomersPage() {
     setError('')
   }
 
-  const handleSubmit = async (event: React.FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
 
     if (!customerForm.name.trim()) {
