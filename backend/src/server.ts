@@ -3,6 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import { authMiddleware, errorHandler } from './middleware/auth.js'
 import authRoutes from './routes/auth.js'
+import customersRoutes from './routes/customers.js'
 
 dotenv.config()
 
@@ -23,6 +24,9 @@ app.use('/api/auth', authRoutes)
 
 // Protected routes - apply auth middleware
 app.use('/api', authMiddleware)
+
+// Customer routes
+app.use('/api/customers', customersRoutes)
 
 app.get('/api/hello', (req, res) => {
   res.json({

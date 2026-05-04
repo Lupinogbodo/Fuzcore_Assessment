@@ -3,7 +3,7 @@ import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
-import Dashboard from './pages/Dashboard'
+import CustomersPage from './pages/CustomersPage'
 
 export default function App() {
   return (
@@ -19,13 +19,21 @@ export default function App() {
             path="/"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <CustomersPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/customers"
+            element={
+              <ProtectedRoute>
+                <CustomersPage />
               </ProtectedRoute>
             }
           />
 
           {/* Catch-all */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/customers" replace />} />
         </Routes>
       </Router>
     </AuthProvider>

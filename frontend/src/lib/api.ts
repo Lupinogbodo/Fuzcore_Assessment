@@ -59,3 +59,42 @@ export function getToken(): string | null {
 export function clearToken() {
   localStorage.removeItem('token')
 }
+
+export async function getCustomers(): Promise<ApiResponse<Customer[]>> {
+  return apiCall('/api/customers')
+}
+
+export async function createCustomer(
+  payload: Omit<Customer, 'id'>
+): Promise<ApiResponse<Customer>> {
+  return apiCall('/api/customers', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  })
+}
+
+export async function updateCustomer(
+  id: string,
+  payload: Omit<Customer, 'id'>
+): Promise<ApiResponse<Customer>> {
+  return apiCall(`/api/customers/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(payload),
+  })
+}
+
+export async function deleteCustomer(
+  id: string
+): Promise<ApiResponse<{ success: boolean }>> {
+  return apiCall(`/api/customers/${id}`, {
+    method: 'DELETE',
+  })
+}
+
+interface Customer {
+  id: string
+  name: string
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+}
