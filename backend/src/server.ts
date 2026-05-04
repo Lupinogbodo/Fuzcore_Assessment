@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.js'
 import customersRoutes from './routes/customers.js'
 import transactionsRoutes from './routes/transactions.js'
 import invoicesRoutes from './routes/invoices.js'
+import dashboardRoutes from './routes/dashboard.js'
 
 dotenv.config()
 
@@ -35,6 +36,9 @@ app.use('/api', transactionsRoutes)
 
 // Invoice routes
 app.use('/api', invoicesRoutes)
+
+// Dashboard route
+app.use('/api', dashboardRoutes)
 
 app.get('/api/hello', (req, res) => {
   res.json({

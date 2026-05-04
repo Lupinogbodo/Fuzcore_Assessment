@@ -1,0 +1,124 @@
+.app-shell {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-8) var(--space-4);
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-10);
+}
+
+.brand-dot {
+  color: var(--color-accent);
+  font-size: 1.5rem;
+  line-height: 0.9;
+}
+
+.sidebar-nav {
+  display: grid;
+  gap: 10px;
+}
+
+.sidebar-link {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+  background: var(--color-surface-2);
+  color: var(--color-text-primary);
+}
+
+.sidebar-link.active {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 13px;
+}
+
+.sidebar-footer {
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sidebar-user {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-user-name {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.sidebar-user-email {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
+.sidebar-logout {
+  width: 100%;
+  justify-content: center;
+}
+
+.main-content {
+  padding: var(--space-8) var(--space-10);
+  min-height: 100vh;
+  overflow: auto;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4);
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .sidebar-nav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    flex: 1;
+  }
+
+  .sidebar-footer {
+    border-top: none;
+    padding-top: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+}

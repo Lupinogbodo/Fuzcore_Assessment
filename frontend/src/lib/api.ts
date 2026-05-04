@@ -178,6 +178,27 @@ export interface InvoiceDetail extends InvoiceListItem {
   items: InvoiceItem[]
 }
 
+export interface DashboardTransaction {
+  id: string
+  amount: number
+  type: 'income' | 'expense'
+  description?: string | null
+  date: string
+  category_name?: string | null
+}
+
+export interface DashboardResponse {
+  totalRevenue: number
+  totalExpenses: number
+  net: number
+  outstandingInvoices: number
+  recentTransactions: DashboardTransaction[]
+}
+
+export async function getDashboard() {
+  return apiCall<DashboardResponse>('/api/dashboard')
+}
+
 export async function getInvoices(status?: 'draft' | 'sent' | 'paid') {
   const query = status ? `?status=${status}` : ''
   return apiCall<InvoiceListItem[]>(`/api/invoices${query}`)

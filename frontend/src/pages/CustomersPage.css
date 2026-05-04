@@ -1,6 +1,5 @@
 .customers-page {
-  padding: var(--space-8);
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 .page-header {
