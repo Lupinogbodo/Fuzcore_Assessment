@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import { authMiddleware, errorHandler } from './middleware/auth.js'
+import authRoutes from './routes/auth.js'
 
 dotenv.config()
 
@@ -12,12 +13,15 @@ const PORT = process.env.PORT || 5000
 app.use(cors())
 app.use(express.json())
 
-// Health check
+// Health check (no auth required)
 app.get('/health', (req, res) => {
   res.json({ data: 'ok', error: null })
 })
 
-// Protected routes example (to be replaced by actual routes)
+// Auth routes (no auth required)
+app.use('/api/auth', authRoutes)
+
+// Protected routes - apply auth middleware
 app.use('/api', authMiddleware)
 
 app.get('/api/hello', (req, res) => {
